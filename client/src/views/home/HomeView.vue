@@ -1,219 +1,373 @@
 <template>
+  <!-- 頂部區域佈局 -->
   <div class="home">
-    <!-- 頂部區域 -->
     <div class="header">
-      <div class="item-wrapper">
-        <div class="column gradient-blue">
-          <div class="item">
-            <div class="title">總銷售額</div>
-            <div class="num">78,000</div>
-            <div class="bottom">今日銷售額</div>
-          </div>
-        </div>
-        <div class="space"></div>
-        <div class="column gradient-green">
-          <div class="item">
-            <div class="title">訪問量</div>
-            <div class="num">78,000</div>
-            <div class="bottom">今日訪問量</div>
-          </div>
-        </div>
-        <!-- <div class="space"></div>
-        <div class="column gradient-red">
-          <div class="item">
-            <div class="title">總銷售額</div>
-            <div class="num">78,000</div>
-            <div class="bottom">今日銷售額</div>
-          </div>
-        </div>
-        <div class="space"></div>
-        <div class="column gradient-purple">
-          <div class="item">
-            <div class="title">訪問量</div>
-            <div class="num">78,000</div>
-            <div class="bottom">今日訪問量</div>
-          </div>
-        </div> -->
+      <div class="item">總銷售額
+        <div class="num">{{ totalData.saleTotal }}</div>
+        <div class="bottom">今日销售额：{{ totalData.sale }}</div>
       </div>
-  </div>
-
-    <div class="sales-info">
-      <div class="sales-column">
-        <div class="sales-title">月銷售額</div>
-        <div class="sales-content"></div>
+      <div class="item">總訪問量
+        <div class="num">{{ totalData.viewsTotal }}</div>
+        <div class="bottom">今日訪問量：{{ totalData.views }}</div>
       </div>
-
-      <div class="sales-space"></div>
-
-      <div class="sales-column">
-        <div class="sales-title">比例分配</div>
-        <div class="sales-content"></div>
+      <div class="item">總收藏量
+        <div class="num">{{ totalData.collectTotal }}</div>
+        <div class="bottom">今日銷售額：{{ totalData.collectTotal }}</div>
+      </div>
+      <div class="item">總支付量
+        <div class="num">{{ totalData.payTotal }}</div>
+        <div class="bottom">今日支付量：{{ totalData.pay }}</div>
       </div>
     </div>
-
 
     <!-- 訪問數據統計 -->
-    <!-- <div class="content">
+    <div class="content">
       <div class="time-info" id="box13">
         <div class="title">月銷售額</div>
-        <div id="charts" style="width: 100%; height: 300px;"></div>
+        <div id="charts" style="width: 100%; height: 300px;"> <!-- 第二步準備dom元素 -->
+        </div>
+      </div>
+      <div class="area" id="box1">比例分配
+        <div class="title">產品銷售額</div>
+        <div id="pie" style="width: 100%; height: 300px;"></div>
+      </div>
     </div>
-    <div class="area" id="box1">比例分配</div>
-    </div> -->
 
-    <!-- 最新內容 -->
-    <!-- <div class="home-fotter">
-
-
-
-    </div>> -->
-
-
-
-
+    <!-- <div class="home-footter">
+    <el-card class="box-card">
+      <div slot="header" class="clearfix"><span>今日訂單</span></div>
+      <div class="text item">
+        <el-row>
+          <el-col :span="8">
+            <div class="title">今日訂單數</div>
+            <div>{{}}</div>
+          </el-col>
+          <el-col :span="8">
+            <div class="title">匯總確認訂單</div>
+            <div>{{}}</div>
+          </el-col>
+          <el-col :span="8">
+            <div class="title">今日金額</div>
+            <div>{{}}</div>
+          </el-col>
+        </el-row>
+      </div>
+    </el-card>
+    <el-card class="box-card">
+      <div slot="header" class="clearfix"><span>今日訂單</span></div>
+      <div class="text item">
+        <el-row>
+          <el-col :span="8">
+            <div class="title">今日訂單數</div>
+            <div>{{}}</div>
+          </el-col>
+          <el-col :span="8">
+            <div class="title">匯總確認訂單</div>
+            <div>{{}}</div>
+          </el-col>
+          <el-col :span="8">
+            <div class="title">今日金額</div>
+            <div>{{}}</div>
+          </el-col>
+        </el-row>
+      </div>
+    </el-card>
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span>快速入口</span>
+      </div>
+      <div class="text item">
+        <el-button type="primary">產品管理</el-button>
+        <el-button>消息管理</el-button>
+        <el-button>內容管理</el-button>
+      </div>
+    </el-card>
+  </div> -->
   </div>
-
-  
-
 </template>
 
 <script>
+import * as echart from 'echarts' //第一步，引入echarts
 export default {
   // 一進首頁要訪問api
 
   // 數據往視圖上渲染，裝容器的內容
   data() {
-    return {};
+    return {
+      totalData: {}, //首頁數據統計
+    };
   },
 
 
   // 生命週期函數，方法一進來就被生命週期調用
   created() {
-    // this.totalInfo(); //首頁數據統計
+    this.totalInfo(); //首頁數據統計
     this.orderInfo(); //首頁訂單訊息
+    this.format();
     // console.log('id',document.getElementById('charts'));
   },
 
 
-  // 最早能獲取dom元素的生命週期元素
-  mounted(){
-    console.log('id',document.getElementById('charts'));
-    
-    // var myChart = echart.init(document.getElementById('charts'));
-
-      // myChart.setOption({
-      // title: {
-      //   text:''
-      // },
-      // tooltip: {},
-      // xAxis: {
-      //   data: ['襯衫', '羊毛衫']
-      // },
-      // yAxis: {},
-      // series: [
-      //   {
-      //     name: '銷量',
-      //     type: 'bae',
-      //     data: [5, 20, ]
-      //   }
-      // ]
-      // });
-
-
+  // 最早可以獲取dom元素的生命週期元素 掛載完畢執行
+  mounted() {
+    console.log('mounted-id', document.getElementById('charts'));
+    this.line()
+    this.pie()
   },
 
   // 方法
   methods: {
-    // async totalInfo() {
-    //   let res = await this.$api.totalInfo();
-    //   console.log("首頁數據", res.data);
-    // },
-  },
+    // 獲取數據統計
+    async totalInfo() {
+      let res = await this.$api.totalInfo()
+      console.log('首頁統計訊息---', res.data.data.list);
+      this.totalData = res.data.data.list;
+    },
+
+    // 獲取今日訂單統計訊息
+    async orderInfo() {
+      let res = await this.$api.orderInfo()
+      console.log('獲取今日訂單統計訊息---', res.data)
+      this.orderData = res.data.list
+    },
+
+    // 獲取圖表動態數據
+    async format(){
+      let res = await this.$api.format()
+      console.log('獲取圖表動態數據---', res.data);
+    },
+
+
+
+    // 繪製圖表折線，原本寫在mounted裡後把他寫到方法裡
+    line() {
+      // 基於準備好的demo，初始化echarts實體
+      var myChart = echart.init(document.getElementById('charts'));
+
+      myChart.setOption({
+        // title: {
+        //   text:''
+        // },
+        tooltip: { //提示框組件
+          trigger: 'axis',
+          // 提示框浮層內容格式器，支持字符串模板和回調函數兩種形式
+          formatter: '{a}-{b}-{c}'
+        },
+        legend: {}, // 系列文字，默認表示會自己看有甚麼series
+        toolbox: {
+          feature: {
+            // 可儲存圖片的功能
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          data: ['襯衫', '羊毛衫', '褲子', '雪紡衫', '高跟鞋']
+        },
+        yAxis: {},
+        series: [ //圖表內容
+          {
+            name: '銷量額',
+            type: 'line',
+            data: [10, 25, 55, 40, 20],
+            smooth: true, //是否平滑曲線顯示
+          },
+          {
+            name: '銷量量',
+            type: 'bar',
+            data: [5, 20, 50, 30, 10]
+          }
+
+        ]
+
+      });
+    },
+    // 繪製餅圖
+    pie() {
+      var myChart = echart.init(document.getElementById('pie'));
+      var option;
+
+      option = {
+        tooltip: {
+          trigger: 'item'
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left'
+        },
+        series: [
+          {
+            name: '產品銷售比例',
+            type: 'pie',
+            radius: '50%',
+            data: [
+              { value: 1048, name: '肉類' },
+              { value: 735, name: '水產' },
+              { value: 580, name: '蔬果' },
+              { value: 484, name: '冷凍食品' },
+              { value: 300, name: '水果' }
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      };
+      option && myChart.setOption(option);
+    },
+    line2() {
+      // 原本寫在mounted裡後把他寫到方法裡
+      var myChart = echart.init(document.getElementById('charts'));
+
+      myChart.setOption({
+        // title: {
+        //   text:''
+        // },
+        tooltip: { //提示框組件
+          trigger: 'axis',
+          // 提示框浮層內容格式器，支持字符串模板和回調函數兩種形式
+          formatter: '{a}-{b}-{c}'
+        },
+        xAxis: {
+          data: ['襯衫', '羊毛衫', '褲子', '雪紡衫']
+        },
+        yAxis: {},
+        series: [
+          {
+            name: '銷量',
+            type: 'bar',
+            data: [5, 20, 10, 30]
+          }
+        ]
+      });
+    },
+
+    // 過濾器--處理數據格式，value值就是你要對誰使用這個過濾器的源數據
+    // filiters:{
+    //   num:(value){
+    //     if(!value) return; //如果value值不存在
+    //     return value.toLocateString()
+    //   },
+    // }
+
+  }
 };
+
 </script>
 
+<!-- scoped限制在單一檔案元件裡 -->
 <style lang="less" scoped>
+// .home {
+//   margin: 0px; 
+// }
+
 .header {
   display: flex;
-  justify-content: space-between;
-  margin: 20px;
+  padding-right: 30px;
+
+  .item {
+    flex: 1;
+    height: 100px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+
+    .num {
+      font-size: 22px;
+      margin: 10px;
+      color: #fff;
+    }
+
+    .bottom {
+      position: absolute;
+      border-top: 1px solid rgb(246, 245, 245);
+      padding: 10px 20px;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      color: #fff;
+      font-weight: normal;
+    }
+  }
+
+  .item:nth-child(1) {
+    background-image: linear-gradient(#df887d, #88554d);
+  }
+
+  .item:nth-child(2) {
+    background-image: linear-gradient(#409eff, #2e556e);
+  }
+
+  .item:nth-child(3) {
+    background-image: linear-gradient(#b54fa8, #713c7a);
+  }
+
+  .item:nth-child(4) {
+    background-image: linear-gradient(#1cd2f1, #39717a);
+  }
 }
 
-.item-wrapper {
-  display: flex; /* Flexbox 布局 */
-  justify-content: space-between; /* 平均分配列 */
-  width: 100%; /* 佔滿父容器的寬度 */
-}
-
-.column {
-  flex: 1;
-  border-radius: 8px;
-  background-color: #fff;
-  padding: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.5));
-}
-.space {
-  width: 50px; /* 每個欄位間距寬 */
-}
-
-.gradient-blue {
-  background: linear-gradient(to bottom, #2c92eb, #001f3f);
-}
-
-.gradient-green {
-  background: linear-gradient(to bottom, #64e773, #001f3f);
-}
-
-.gradient-red {
-  background: linear-gradient(to bottom, #dd7974, #001f3f);
-}
-
-.gradient-purple {
-  background: linear-gradient(to bottom, #d869e9, #001f3f);
-}
-
-.item {
-}
-
-.title {
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-.num {
-  font-size: 24px;
-}
-
-.bottom {
-  color: #888;
-}
 
 .content {
-  display: flex;
-  justify-content: space-between;
-  height: 300px;
-  margin-top: 20px;
-}
-
-.time-info {
-  flex: 1;
-  padding: 20px;
-  border: 1px solid #ccc; /* 添加邊框樣式，可根據需要自訂 */
-  height: 300px;
   margin: 20px;
+  display: flex;
+  height: 320px;
+
+  .time-info {
+    flex: 2;
+    background: #fff;
+    margin-right: 20px;
+    padding: 10px;
+  }
+
+  .area {
+    flex: 1;
+    background: #fff;
+    padding: 10px;
+  }
+
 }
 
-.sales-title {
-  font-weight: bold;
-  margin-bottom: 12px;
-  //   text-align: center;
-}
+// 內容
+.home-fotter {
+  display: flex;
+  padding-left: 20px;
+  margin-bottom: 20px;
 
-.sales-content {
-}
+  .box-card {
+    flex: 1;
+    margin-right: 30px;
 
-.sales-space {
-  width: 20px;
+    span {
+      font-weight: 600;
+    }
+  }
+
+  .item {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+
+    .el-col {
+      border-right: 1px solid #eee;
+    }
+
+    .el-col:last-child {
+      border-right: none;
+    }
+
+    .title {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+  }
 }
 </style>

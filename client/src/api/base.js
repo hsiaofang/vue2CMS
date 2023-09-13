@@ -1,6 +1,6 @@
 // 接口統一地址，方便修改調整
 const base = {
-    totalInfo:'/api/home/dataCount', //首頁統計數據
+    totalInfo:'/home/dataCount', //首頁統計數據
 }
 
 // 單一導出

@@ -136,4 +136,141 @@
   }
 }
 
+
+
 </style>
+
+
+
+
+
+<!-- <div class="column gradient-green">
+  <div class="item">
+    <div class="title">訪問量</div>
+    <div class="num">78,000</div>
+    <div class="num">7{{ totalData.viewsTotal | num }}</div>
+    <div class="bottom">今日訪問量: {{ totalData.views | num }}</div>
+  </div>
+</div> -->
+
+<!-- <div class="column gradient-red">
+  <div class="item">
+    <div class="title">總銷售額</div>
+    <div class="num">78,000</div>
+    <div class="bottom">今日銷售額</div>
+  </div>
+</div>
+<div class="space"></div>
+<div class="column gradient-purple">
+  <div class="item">
+    <div class="title">訪問量</div>
+    <div class="num">78,000</div>
+    <div class="bottom">今日訪問量</div>
+  </div>
+</div> -->
+
+
+
+
+ <!-- 訪問數據統計 -->
+    <!-- <div class="content">
+      <div class="time-info" id="box13">
+        <div class="title">月銷售額</div>
+        <div id="charts" style="width: 100%; height: 300px;"></div>
+    </div>
+    <div class="area" id="box1">比例分配</div>
+    </div> -->
+
+    <!-- 最新內容 -->
+    <!-- <div class="home-fotter">
+
+
+
+
+
+<!-- 自己寫的 -->
+<!-- <style lang="less" scoped>
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.item-wrapper {
+  display: flex; /* Flexbox 布局 */
+  justify-content: space-between; /* 平均分配列 */
+  width: 100%; /* 佔滿父容器的寬度 */
+}
+
+.column {
+  flex: 1;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.5));
+}
+.space {
+  width: 50px; /* 每個欄位間距寬 */
+}
+
+.gradient-blue {
+  background: linear-gradient(to bottom, #2c92eb, #001f3f);
+}
+
+.gradient-green {
+  background: linear-gradient(to bottom, #64e773, #001f3f);
+}
+
+ 
+  background: linear-gradient(to bottom, #dd7974, #001f3f);
+}
+
+.gradient-purple {
+  background: linear-gradient(to bottom, #d869e9, #001f3f);
+}
+
+.item {
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.num {
+  font-size: 24px;
+}
+
+.bottom {
+  color: #888;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  height: 300px;
+  margin-top: 20px;
+}
+
+.time-info {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc; /* 添加邊框樣式，可根據需要自訂 */
+  height: 300px;
+  margin: 20px;
+}
+
+.sales-title {
+  font-weight: bold;
+  margin-bottom: 12px;
+  //   text-align: center;
+}
+
+.sales-content {
+}
+
+.sales-space {
+  width: 20px;
+}
+</style> -->

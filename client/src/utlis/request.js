@@ -14,7 +14,7 @@ instance.interceptors.request.use(function (config) {
         config.data = qs.stringify(config.data);
     }
     return config;
-}, function (error) {
+}, function (error) { 
     return Promise.reject(error);
 });
 

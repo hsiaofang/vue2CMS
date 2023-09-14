@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 //导入数据库 sqlFn('sql',[],res=>{})
 const sqlFn = require("./mysql");
-//导入mockjs
 const Mock = require("mockjs");
 
 //订单列表--------------------------
@@ -158,7 +157,7 @@ router.get("/collect", (req, res) => {
   });
 });
 
-//5. 撤销汇总-id----------------------------------------
+// //5. 撤销汇总-id----------------------------------------
 router.get("/cancel", (req, res) => {
   //查询数据库
   const id = req.query.id;

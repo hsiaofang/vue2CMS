@@ -33,56 +33,57 @@
       </div>
     </div>
 
-    <!-- <div class="home-footter">
-    <el-card class="box-card">
-      <div slot="header" class="clearfix"><span>今日訂單</span></div>
-      <div class="text item">
-        <el-row>
-          <el-col :span="8">
-            <div class="title">今日訂單數</div>
-            <div>{{}}</div>
-          </el-col>
-          <el-col :span="8">
-            <div class="title">匯總確認訂單</div>
-            <div>{{}}</div>
-          </el-col>
-          <el-col :span="8">
-            <div class="title">今日金額</div>
-            <div>{{}}</div>
-          </el-col>
-        </el-row>
-      </div>
-    </el-card>
-    <el-card class="box-card">
-      <div slot="header" class="clearfix"><span>今日訂單</span></div>
-      <div class="text item">
-        <el-row>
-          <el-col :span="8">
-            <div class="title">今日訂單數</div>
-            <div>{{}}</div>
-          </el-col>
-          <el-col :span="8">
-            <div class="title">匯總確認訂單</div>
-            <div>{{}}</div>
-          </el-col>
-          <el-col :span="8">
-            <div class="title">今日金額</div>
-            <div>{{}}</div>
-          </el-col>
-        </el-row>
-      </div>
-    </el-card>
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>快速入口</span>
-      </div>
-      <div class="text item">
-        <el-button type="primary">產品管理</el-button>
-        <el-button>消息管理</el-button>
-        <el-button>內容管理</el-button>
-      </div>
-    </el-card>
-  </div> -->
+    <!-- 最新內容 -->
+    <div class="home-fotter">
+      <el-card class="box-card">
+        <div slot="header" class="clearfix"><span>今日訂單</span></div>
+        <div class="text item">
+          <el-row>
+            <el-col :span="8">
+              <!-- <div class="title">今日訂單數</div>
+              <div>{{ orderData.curOrderCount }}</div> -->
+            </el-col>
+            <el-col :span="8">
+              <!-- <div class="title">匯總確認訂單</div>
+              <div>{{ orderData.curCollect }}</div> -->
+            </el-col>
+            <el-col :span="8">
+              <!-- <div class="title">今日金額</div>
+              <div>{{ orderData.curMoney }}</div> -->
+            </el-col>
+          </el-row>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix"><span>今日訂單</span></div>
+        <div class="text item">
+          <el-row>
+            <el-col :span="8">
+              <!-- <div class="title">今日訂單數</div>
+              <div>{{ orderData.orderCount }}</div> -->
+            </el-col>
+            <el-col :span="8">
+              <!-- <div class="title">匯總確認訂單</div>
+              <div>{{ orderData.collect }}</div> -->
+            </el-col>
+            <el-col :span="8">
+              <!-- <div class="title">今日金額</div>
+              <div>{{ orderData.money }}</div> -->
+            </el-col>
+          </el-row>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>快速入口</span>
+        </div>
+        <div class="text item">
+          <el-button type="primary">產品管理</el-button>
+          <el-button>消息管理</el-button>
+          <el-button>內容管理</el-button>
+        </div>
+      </el-card>
+    </div>
   </div>
 </template>
 
@@ -95,6 +96,7 @@ export default {
   data() {
     return {
       totalData: {}, //首頁數據統計
+      orderInfo: {},
     };
   },
 
@@ -102,8 +104,8 @@ export default {
   // 生命週期函數，方法一進來就被生命週期調用
   created() {
     this.totalInfo(); //首頁數據統計
-    this.orderInfo(); //首頁訂單訊息
-    this.format();
+    // this.orderInfo(); //首頁訂單訊息
+    // this.format();
     // console.log('id',document.getElementById('charts'));
   },
 
@@ -125,17 +127,30 @@ export default {
     },
 
     // 獲取今日訂單統計訊息
-    async orderInfo() {
-      let res = await this.$api.orderInfo()
-      console.log('獲取今日訂單統計訊息---', res.data)
-      this.orderData = res.data.list
-    },
+    // async orderInfo() {
+    //   let res = await this.$api.orderInfo()
+    //   console.log('獲取今日訂單統計訊息---', res.data)
+    //   this.orderData = res.data.list
+    // },
 
     // 獲取圖表動態數據
-    async format(){
-      let res = await this.$api.format()
-      console.log('獲取圖表動態數據---', res.data);
-    },
+    // async format(){
+    //   let res = await this.$api.format()
+    //   console.log('獲取圖表動態數據---', res.data);
+    //   console.log(res.data.result.data.sale_money); //[{},{},{}]
+    //   // 折線圖 柱狀圖數據格式: [xx,xx,xx]
+    //   // 獲取x軸的數據名稱
+    //   // let arr =res.data.result.data.sale+money;
+    //   // let arrx=[], year1=[], year2=[];
+    //   // arr.forEach(ele => {
+    //   //     arrx.push(ele.name)
+    //   //     yarr1.push(ele.num)
+    //   //     yarr2.push(ele.total_amount)
+    //   // });
+    //   // console.log(arrx);
+    //   // console.log(yarr1);
+    //   // console.log(yarr2);
+    // },
 
 
 

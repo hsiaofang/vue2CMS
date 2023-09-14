@@ -1,4 +1,4 @@
-// 公共的請求方法
+// 公共的請求方法，包含接口的請求方法
 import base from './base'
 import axios from '@/utlis/request'
 
@@ -18,5 +18,7 @@ const api ={
         return axios.get(base.format)
     },
 }
+
+
 
 export default api

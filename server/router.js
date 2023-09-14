@@ -15,32 +15,33 @@ const adminPermission = require("./login/data/admin_permission.json");
 const vipPermission = require("./login/data/vip_permission.json");
 
 // 登入（管理員，vip帳號）
-router.post("/login", (req, res) => {
-  const username = req.body.user;
-  const pwd = req.body.pwd;
-  if (username === "admin") {
-    // 管理員
-    res.send(adminLogin)
-  } else {
-    res.send(vipLogin)
-  }
-})
+// router.post("/login", (req, res) => {
+//   const username = req.body.user;
+//   const pwd = req.body.pwd;
+//   if (username === "admin") {
+//     // 管理員
+//     res.send(adminLogin)
+//   } else {
+//     res.send(vipLogin)
+//   }
+// })
 
 // 用戶權限
-router.get("/permission", (req, res) => {
-  const token = req.query.token;
-  if (toekn === 'admin') {
-    res.send(adminPermission)
-  } else {
-    res.send(vipPermission)
-  }
-})
+// router.get("/permission", (req, res) => {
+//   const token = req.query.token;
+//   if (toekn === 'admin') {
+//     res.send(adminPermission)
+//   } else {
+//     res.send(vipPermission)
+//   }
+// })
+
 
 // 首頁
 router.get("/home/dataCount", (req, res) => {
   res.send(
     Mock.mock({
-      info: "数据统计",
+      info: "數據統計",
       success: true,
       status: 200,
       data: {
@@ -83,9 +84,52 @@ router.get("/home/dataCount", (req, res) => {
   );
 });
 
-router.get("/home/format", (req, res) => {
-  res.send(data);
+
+// 首頁折線圖數據統計
+// router.get("/home/format", (req, res) => {
+//   res.send(data);
+// });
+
+
+// 首頁 -今日的統計
+router.get("/home/ordeInfo", (req, res) => {
+  res.send(
+    Mock.mock({
+      info: "訂單統計訊息",
+      success: true,
+      list: {
+        "orderCount|1-100000": 1,
+        "curOrderCount|1-1000": 1,
+        count: function () {
+          if (this.curOrderCount > this.orderCount) {
+            [this.orderCount, this.curOrderCount] = [
+              this.curOrderCount,
+              this.orderCount,
+            ];
+          }
+        },
+        "money|1-200000": 1,
+        "curMoney|1-1000": 1,
+        moneyfun: function () {
+          if (this.curMoney > this.money) {
+            [this.money, this.curMoney] = [this.curMoney, this.money];
+          }
+        },
+        "collect|1-99999": 1,
+        "curCollect|1-999": 1,
+        collectfun: function () {
+          if (this.curCollect > this.collect) {
+            [this.collect, this.curCollect] = [this.curCollect, this.collect];
+          }
+        },
+        department: "",
+        branchSchool: "",
+      },
+    })
+  );
 });
+
+
 
 
 module.exports = router 

@@ -32,6 +32,6 @@ app.use('/advert',advert)
 
 
 // 監聽
-app.listen(7788,()=>{
-    console.log('7788')
+app.listen(7789,()=>{
+    console.log('7789')
 })

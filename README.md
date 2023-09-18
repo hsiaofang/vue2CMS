@@ -84,3 +84,4 @@ npm install less-loader --save-dev
 ### 產品管理-產品列表
 1. 佈局
 2. 數據獲取
+3. 到componets裡寫分頁

@@ -17,6 +17,11 @@ const api ={
     format(){
         return axios.get(base.format)
     },
+
+    // 產品列表
+    projectList(params){
+        return axios.get(base.projectList, {params});
+    },
 }
 
 

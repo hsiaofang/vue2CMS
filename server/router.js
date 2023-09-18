@@ -92,7 +92,7 @@ router.get("/home/dataCount", (req, res) => {
 
 
 // 首頁 -今日的統計
-router.get("/home/ordeInfo", (req, res) => {
+router.get("/home/orderInfo", (req, res) => {
   res.send(
     Mock.mock({
       info: "訂單統計訊息",
@@ -129,7 +129,33 @@ router.get("/home/ordeInfo", (req, res) => {
   );
 });
 
-
+// 商品列表，參數: page頁碼
+router.get("/goods/projectList", (req, res) => {
+  // const page = req.query.page || 1; //如果請求中沒有參數或為空，則默認為1
+  const sqlLen = "select * from project where id";
+  sqlFn(sqlLen, null, (data) => { 
+    let len = data.length;
+    console.log(len)
+    const sql = 
+    // "select * from project order by id desc limit 8 offset" + (page - 1) * 8;
+    "select * from project order by id desc limit 8 offset 0";
+    sqlFn(sql, null, (result) => {
+      if (result.length > 0 ) {
+        res.send({
+          status: 200,
+          data: result,
+          pageSize: 8,
+          total: len,
+        });
+      } else {
+        res.send({
+          status: 500,
+          msg: "暫無數據",
+        });
+      }
+    });
+  });
+});
 
 
 module.exports = router 

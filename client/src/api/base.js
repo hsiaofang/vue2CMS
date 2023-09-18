@@ -3,6 +3,8 @@ const base = {
     totalInfo:'/home/dataCount', //首頁統計數據
     orderInfo: "/home/orderInfo", //訂單數據
     format: "api/home/format", //折線數據
+    projectList: "/goods/projectList", //產品列表
+
 }
 
 // 單一導出

@@ -3,7 +3,7 @@ const mysql = require('mysql')
 
 // 創建數據庫連接
 const client = mysql.createConnection({
-    host:'localhsot',
+    host:'localhost',
     user:'root',
     password:'',
     database:'ego',

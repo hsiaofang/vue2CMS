@@ -96,7 +96,7 @@ export default {
   data() {
     return {
       totalData: {}, //首頁數據統計
-      orderInfo: {},
+      orderData: {},
     };
   },
 
@@ -104,7 +104,7 @@ export default {
   // 生命週期函數，方法一進來就被生命週期調用
   created() {
     this.totalInfo(); //首頁數據統計
-    // this.orderInfo(); //首頁訂單訊息
+    this.orderInfo(); //首頁訂單訊息
     // this.format();
     // console.log('id',document.getElementById('charts'));
   },
@@ -127,11 +127,11 @@ export default {
     },
 
     // 獲取今日訂單統計訊息
-    // async orderInfo() {
-    //   let res = await this.$api.orderInfo()
-    //   console.log('獲取今日訂單統計訊息---', res.data)
-    //   this.orderData = res.data.list
-    // },
+    async orderInfo() {
+      let res = await this.$api.orderInfo()
+      console.log('獲取今日訂單統計訊息---', res.data)
+      this.orderData = res.data.list;
+    },
 
     // 獲取圖表動態數據
     // async format(){

@@ -25,7 +25,7 @@ const Mock = require("mockjs");
         } else {
             res.send({
                 status: 500,
-                msg: "暂无数据"
+                msg: '暫無數據'
             })
         }
     })
@@ -159,7 +159,7 @@ router.get("/content/selectTbContentAllByCategoryId", (req, res) => {
         } else {
             res.send({
                 status: 500,
-                msg: "暂无数据"
+                msg: "暫無數據"
             })
         }
     })

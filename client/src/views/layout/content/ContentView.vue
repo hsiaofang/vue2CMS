@@ -38,7 +38,7 @@ export default {
 <style lang="less" scoped>
 .header {
   height: 50px;
-  background-color: #0872a3;
+  background-color: rgb(195, 178, 160);
   color: #fff;
   line-height: 50px;
   .open {

@@ -150,11 +150,31 @@ router.get("/goods/projectList", (req, res) => {
       } else {
         res.send({
           status: 500,
-          msg: "暫無數據",
+          msg: "無",
         });
       }
     });
   });
+});
+
+// 搜尋功能，參數：search
+router.get("/goods/projectList", (req, res) => {
+var search = req.query.search;
+// title，sellPoint的欄位若包含我搜尋的字，做模糊查詢
+const sql = "select * from project where concat(`title`, `selPoint`, `descs`) like'%' "+ search + "%";
+sqlFn(sql, null, (result) => {
+  if(result.length > 0){
+    res.send({
+      status: 200,
+      result,
+    });
+  } else {
+    res.send({
+      status: 500,
+      msg: "暫無數據",
+    });
+  }
+});
 });
 
 

@@ -4,9 +4,10 @@ const mysql = require('mysql')
 // 創建數據庫連接
 const client = mysql.createConnection({
     host:'localhost',
+    port: '33306',        // 這裡設置你的數據庫端口號
+    database:'ego',
     user:'root',
     password:'',
-    database:'ego',
 })
 
 

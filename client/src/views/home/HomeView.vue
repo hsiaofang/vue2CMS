@@ -176,20 +176,20 @@ export default {
           }
         },
         xAxis: {
-          data: ['襯衫', '羊毛衫', '褲子', '雪紡衫', '高跟鞋']
+          data: ['上衣', '下著', '外套', '洋裝', '套裝', '配件', '48HR限定價']
         },
         yAxis: {},
         series: [ //圖表內容
           {
             name: '銷量額',
             type: 'line',
-            data: [10, 25, 55, 40, 20],
+            data: [10, 25, 55, 40, 20, 10, 50],
             smooth: true, //是否平滑曲線顯示
           },
           {
             name: '銷量量',
             type: 'bar',
-            data: [5, 20, 50, 30, 10]
+            data: [5, 20, 50, 30, 10, 10, 50]
           }
 
         ]
@@ -215,12 +215,12 @@ export default {
             type: 'pie',
             radius: '50%',
             data: [
-              { value: 1048, name: '肉類' },
-              { value: 735, name: '水產' },
-              { value: 580, name: '蔬果' },
-              { value: 484, name: '冷凍食品' },
-              { value: 300, name: '水果' }
+              { value: 1048, name: '上衣' },
+              { value: 735, name: '下著' },
+              { value: 580, name: '外套' },
+              { value: 484, name: '洋裝' },
             ],
+
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
@@ -314,19 +314,19 @@ export default {
   }
 
   .item:nth-child(1) {
-    background-image: linear-gradient(#df887d, #88554d);
+    background-image: linear-gradient(#e9c9ab, #886f4dfe);
   }
 
   .item:nth-child(2) {
-    background-image: linear-gradient(#409eff, #2e556e);
+    background-image: linear-gradient(#e9c9ab, #886f4dfe);
   }
 
   .item:nth-child(3) {
-    background-image: linear-gradient(#b54fa8, #713c7a);
+    background-image: linear-gradient(#e9c9ab, #886f4dfe);
   }
 
   .item:nth-child(4) {
-    background-image: linear-gradient(#1cd2f1, #39717a);
+    background-image: linear-gradient(#e9c9ab, #886f4dfe);
   }
 }
 

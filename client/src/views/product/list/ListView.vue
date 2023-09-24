@@ -3,6 +3,9 @@
       加入添加和刪除按鈕
       ElementUI表格 樣式 放入content
       tableData放入data裡
+      每個頁面都分頁，寫成全
+      搜尋框若無輸入數字，會跳轉到第一頁
+
 
 -->
 <template>
@@ -25,13 +28,19 @@
       <div class="form">
         <el-form :inline="true" :model="formInline" class="demo-form-inline">
           <el-form-item label="產品名稱">
-            <el-input v-model="formInline.user" size="small" placeholder="產品名稱"></el-input>
+            <!-- 失去焦點，並判斷值為空 -->
+            <el-input v-model="formInline.user" @blur="blur" size="small" placeholder="產品名稱"></el-input>
           </el-form-item>
           <el-form-item label="添加時間">
             <el-date-picker v-model="formInline.date" type="date " placeholder="選擇日期">
             </el-date-picker>
           </el-form-item>
           <el-form-item>
+            <!-- 1. 搜尋按鈕點擊時觸發method裡的onSubmit
+                2. 讀到data裡的formInline
+                3. 接著寫async search接口
+                4. 在方法裡的函數調用 this.search(this.formInline.name)
+                5. 此資料會傳到asyc接口做為參數 -->
             <el-button type="primary" @click="onSubmit" size="small">查询</el-button>
           </el-form-item>
         </el-form>
@@ -111,7 +120,9 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("submit", this.formInline);
+      // this是一個對象
+      console.log("submit", this.formInline.name);
+      this.search(this.formInline.name)
     },
     handleEdit(index, row) {
       console.log(index, row);
@@ -119,6 +130,20 @@ export default {
     handleDelete(index, row) {
       console.log(index, row);
     },
+
+    // CurrentChange(){
+      
+    // },
+
+    // 失去焦點
+    blur(){
+      if(this.formInline.name){
+        this.projectList(1)
+      }
+    },
+
+
+
     // 獲取產品列表數據
     async projectList(page) {
       let res = await this.$api.projectList({page})
@@ -126,7 +151,23 @@ export default {
       this.tableData = res.data.data
       this.total = res.data.total
       this.pageSize = res.data.pageSize
-    }
+    },
+    // 搜尋接口
+    // async search(){
+    //   // 原本有輸入關鍵字，若刪除要回到第一頁，失去焦點
+    //   if(!search){
+    //     return;
+    //   }
+    //   let res = await this.$api.search({search})
+    //   console.log('搜索的數據--',res.data);
+    //   if(res.data.status===200){
+    //     // 如果有數據，要把數據渲染在頁面tableData
+    //     this.tableData = res.data.result;
+    //   }else{
+    //     // 查無數據
+    //     this.tableData=[]
+    //   }
+    // }
   },
   created(){
     this.projectList();

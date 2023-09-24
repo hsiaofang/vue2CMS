@@ -7,7 +7,7 @@ const Mock = require("mockjs");
 //订单列表--------------------------
 //1. 订单列表数据获取 page
 router.get("/list", (req, res) => {
-  //查询数据库
+  //查詢數據庫
   const page = req.query.page || 1;
   const sqlLen = "select * from orderinfo where id";
   sqlFn(sqlLen, null, (data) => {
@@ -26,7 +26,7 @@ router.get("/list", (req, res) => {
       } else {
         res.send({
           status: 500,
-          msg: "暂无数据",
+          msg: "暫無數據",
         });
       }
     });
@@ -45,6 +45,8 @@ router.get("/list", (req, res) => {
     3. 手机号 
     4. 编号随机生成
 */
+
+// 2. 訂單匯總
 router.get("/changeStatus", (req, res) => {
   //ids='1,2,3'
   let ids = req.query.ids; //
@@ -150,7 +152,7 @@ router.get("/collect", (req, res) => {
       } else {
         res.send({
           status: 500,
-          msg: "暂无数据",
+          msg: "暫無數據",
         });
       }
     });

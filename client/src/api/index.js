@@ -22,6 +22,12 @@ const api ={
     projectList(params){
         return axios.get(base.projectList, {params});
     },
+
+
+    // 搜尋
+    search(){
+        return axios.get(base.search)
+    }
 }
 
 

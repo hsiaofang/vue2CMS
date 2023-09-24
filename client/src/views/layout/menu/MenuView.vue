@@ -3,10 +3,9 @@
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
-      
-      background-color="#112f50"
-      text-color="#fff"
-      active-text-color="#ffd04b"
+      background-color="#635a51"
+      text-color="#e9c9ab"
+      active-text-color="#635a51"
       router :collapse=" isCollapse"
       >
       <!-- isCollapse變量控制  -->
@@ -30,7 +29,8 @@
       </el-submenu> -->
 
       <el-menu-item index="1">
-        <span slot="title">採購系統</span>
+        <i class="el-icon-s-tools"></i>
+        <span slot="title">管理系統</span>
       </el-menu-item>
 
       <el-menu-item index="/">
@@ -84,14 +84,17 @@ export default {
 .el-menu{
     border-right: 0;
     /deep/ .is-active{
-        background-color: #0872a3 !important;
-        color: white;
+      background:#635a51 ;
+      color: white;
     }
 }
 // 不折疊寬度為200
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
-  background-color: #112f50 !important;
+  background:#635a51 !important;
 }
+
 </style>
+
+

@@ -7,6 +7,7 @@ const base = {
     // 產品管理
     projectList: "/goods/projectList", //產品列表
     search:"/goods/search", //搜尋
+    deleteItemById:"/goods/deleteItemById", // 
 
 }
 

@@ -36,7 +36,6 @@ const vipPermission = require("./login/data/vip_permission.json");
 //   }
 // })
 
-
 // 首頁
 router.get("/home/dataCount", (req, res) => {
   res.send(
@@ -84,12 +83,10 @@ router.get("/home/dataCount", (req, res) => {
   );
 });
 
-
 // 首頁折線圖數據統計
 // router.get("/home/format", (req, res) => {
 //   res.send(data);
 // });
-
 
 // 首頁 -今日的統計
 router.get("/home/orderInfo", (req, res) => {
@@ -130,17 +127,43 @@ router.get("/home/orderInfo", (req, res) => {
 });
 
 // 商品列表，參數: page頁碼
+// router.get("/goods/projectList", (req, res) => {
+//   const page = req.query.page || 1; //如果請求中沒有參數或為空，則默認為1
+//   const sqlLen = "select * from project where id";
+
+//   sqlFn(sqlLen, null, (data) => {
+//     let len = data.length;
+//     console.log(len)
+//     const sql =
+//     "select * from project order by id desc limit 8 offset" + (page - 1) * 8;
+//     // "select * from project order by id desc limit 8 offset 0";
+//     sqlFn(sql, null, (result) => {
+//       if (result.length > 0 ) {
+//         res.send({
+//           status: 200,
+//           data: result,
+//           pageSize: 8,
+//           total: len,
+//         });
+//       } else {
+//         res.send({
+//           status: 500,
+//           msg: "伺服器睡覺中，勿擾",
+//         });
+//       }
+//     });
+//   });
+// });
+
 router.get("/goods/projectList", (req, res) => {
-  // const page = req.query.page || 1; //如果請求中沒有參數或為空，則默認為1
+  const page = req.query.page || 1;
   const sqlLen = "select * from project where id";
-  sqlFn(sqlLen, null, (data) => { 
+  sqlFn(sqlLen, null, (data) => {
     let len = data.length;
-    console.log(len)
-    const sql = 
-    // "select * from project order by id desc limit 8 offset" + (page - 1) * 8;
-    "select * from project order by id desc limit 8 offset 0";
+    const sql =
+      "select * from project order by id desc limit 8 offset " + (page - 1) * 8;
     sqlFn(sql, null, (result) => {
-      if (result.length > 0 ) {
+      if (result.length > 0) {
         res.send({
           status: 200,
           data: result,
@@ -150,32 +173,55 @@ router.get("/goods/projectList", (req, res) => {
       } else {
         res.send({
           status: 500,
-          msg: "無",
+          msg: "暂无数据",
         });
       }
     });
   });
 });
 
+
 // 搜尋功能，參數：search
-router.get("/goods/projectList", (req, res) => {
-var search = req.query.search;
-// title，sellPoint的欄位若包含我搜尋的字，做模糊查詢
-const sql = "select * from project where concat(`title`, `selPoint`, `descs`) like'%' "+ search + "%";
-sqlFn(sql, null, (result) => {
-  if(result.length > 0){
-    res.send({
-      status: 200,
-      result,
-    });
-  } else {
-    res.send({
-      status: 500,
-      msg: "暫無數據",
-    });
-  }
-});
+router.get("/goods/search", (req, res) => {
+  var search = req.query.search;
+  const sql =
+    // title，sellPoint的欄位若包含我輸入的字，做模糊查詢
+    "select * from project where concat(`title`,`sellPoint`,`descs`) like '%" +
+    search +
+    "%'";
+
+  sqlFn(sql, null, (result) => {
+    if (result.length > 0) {
+      res.send({
+        status: 200,
+        result,
+      });
+    } else {
+      res.send({
+        status: 500,
+        msg: "查無資料",
+      });
+    }
+  });
 });
 
+router.get("/goods/deleteItemById", (req, res) => {
+  var id = req.query.id;
+  const sql = "delete from project where id=?";
+  const arr = [id];
+  sqlFn(sql, arr, (result) => {
+    if (result.affectedRows > 0) {
+      res.send({
+        status: 200,
+        msg: "刪除成功",
+      });
+    } else {
+      res.send({
+        status: 500,
+        msg: "失敗",
+      });
+    }
+  });
+});
 
-module.exports = router 
+module.exports = router;

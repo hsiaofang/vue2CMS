@@ -25,8 +25,13 @@ const api ={
 
 
     // 搜尋
-    search(){
-        return axios.get(base.search)
+    search(params){
+        return axios.get(base.search, {params});
+    },
+
+    // 刪除 id
+    deleteItemById(params){
+        return axios.get(base.deleteItemById, {params});
     }
 }
 

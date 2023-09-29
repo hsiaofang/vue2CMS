@@ -24,6 +24,11 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
+### node.js 啟動
+node index.js
+
+
+
 ###
 1. vue create client
 如果vue版本是2vuex就要3
